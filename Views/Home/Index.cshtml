@@ -1,0 +1,22 @@
+﻿@using BookShop.Common
+@using BookShop.Repositories
+@inject UserRepository UserRepository
+@{
+    ViewData["Title"] = "Home Page";
+    
+    var name = string.Empty;
+    
+    if (CurrentUser.CurrentUserId != null)
+    {
+        var currentUser = UserRepository.GetById((Guid)CurrentUser.CurrentUserId);
+
+        if (currentUser != null)
+        {
+            name = $"{currentUser.FirstName} {currentUser.LastName}";
+        }
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @name</h1>
+</div>

@@ -1,0 +1,62 @@
+﻿@model List<PublicBookViewModel>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Public books</h2>
+        </div>
+        <div class="card-body table-responsive">
+            @if (!Model.Any())
+            {
+                <h3 class="text-danger">No books found</h3>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Content
+                        </th>
+                        <th>
+                            Author
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (string.IsNullOrEmpty(book.ImageBase64))
+                                {
+                                    <h5 class="text-danger">No Photo</h5>
+                                }
+                                else
+                                {
+                                    <img style="height: 160px;" src="data:image/png;base64,@book.ImageBase64" alt="Uploaded Image">
+                                }
+                            </td>
+                            <td>
+                                @book.Name
+                            </td>
+                            <td>
+                                @book.Content
+                            </td>
+                            <td>
+                                @book.Author
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

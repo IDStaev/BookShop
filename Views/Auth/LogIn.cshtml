@@ -1,0 +1,32 @@
+﻿@model LogInViewModel
+
+<div class="container">
+    <div class="row-cols-1">
+        <div class="row justify-content-center">
+            <div class="col col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>LogIn</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="LogIn" method="post">
+                            <div class="form-floating mb-2">
+                                <input class="form-control" asp-for="Email" type="email" placeholder=""/>
+                                <label class="form-label">Email</label>
+                                <span class="text-danger" asp-validation-for="Email"></span>
+                            </div>
+                            
+                            <div class="form-floating mb-2">
+                                <input class="form-control" asp-for="Password" type="password" placeholder=""/>
+                                <label class="form-label">Password</label>
+                                <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            
+                            <button class="btn btn-primary" type="submit">Log In</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

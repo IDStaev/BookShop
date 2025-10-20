@@ -1,0 +1,85 @@
+﻿@model List<MyBookViewModel>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>My books</h2>
+        </div>
+        <div class="card-body table-responsive">
+            @if (!Model.Any())
+            {
+                <h3 class="text-danger">No books found</h3>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Content
+                        </th>
+                        <th>
+                            Accessibility
+                        </th>
+                        <th>
+                            Update
+                        </th>
+                        <th>
+                            Delete
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (string.IsNullOrEmpty(book.ImageBase64))
+                                {
+                                    <h5 class="text-danger">No Photo</h5>
+                                }
+                                else
+                                {
+                                    <img style="height: 160px;" src="data:image/png;base64,@book.ImageBase64" alt="Uploaded Image">
+                                }
+                            </td>
+                            <td>
+                                @book.Name
+                            </td>
+                            <td>
+                                @book.Content
+                            </td>
+                            <td>
+                                @if (book.IsPublic)
+                                {
+                                    <div class="text-success">Public</div>
+                                }
+                                else
+                                {
+                                    <div class="text-danger">Private</div>
+                                }
+                            </td>
+                            <td>
+                                <form asp-action="UpdateBook" method="get" asp-route-id="@book.Id">
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-action="DeleteBook" method="post" asp-route-id="@book.Id">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
